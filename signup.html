@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+ 
+  <title>تسجيل حساب — مشتري / بايع</title>
+   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+ <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; background:#f7f7f9; color:#111; }
+    .container { max-width: 1140px; margin: 32px auto; background:#fff; border-radius:16px; padding:24px; box-shadow:0 6px 20px rgba(0,0,0,.08); }
+    h1{font-size:1.4rem;margin:0 0 16px ;  justify-content: center;  /* توسيط أفقي */
+  align-items: center; display: flex;}
+  fieldset{border:1px solid #eee; border-radius:12px; padding:16px; margin:12px 0}
+    legend{padding:0 6px; font-weight:700; color:#333}
+    label{display:block; margin:8px 0 6px; font-size:.95rem}
+    input, select{width:95%; padding:15px 12px; border:1px solid #ccc; border-radius:10px; font-size:1rem; background:#fff}
+    .row{display:grid; grid-template-columns:repeat(9, 1fr); gap:12px}
+    .col-12{grid-column:span 12}
+    .col-6{grid-column:span 12}
+    .col-4{grid-column:span 12 }
+    .col-3{grid-column:span 12 ; margin-left: 5px; margin-right:5px ;}
+    .row-role{width: 850px;}
+    @media(min-width:720px){ .col-3{grid-column:span 6} .col-4{grid-column:span 8} .col-3{grid-column:span 3} }
+    .hidden{display:none !important}
+    .checkboxes{display:flex; align-items:center; gap:12px; margin-top:8px}
+    .checkboxes input{width:auto}
+    .actions{display:flex; gap:12px; align-items:center; margin-top:14px}
+    .btn{appearance:none; border:0; background:#111; color:#fff; padding:12px 16px; border-radius:12px; cursor:pointer; font-size:1rem}
+    .btn.secondary{background:#e9e9ef; color:#111}
+    .error{display:none; background:#fee; color:#a10000; border:1px solid #f5c2c2; padding:10px 12px; border-radius:10px; margin-top:10px}
+    .help{color:#666; font-size:.9rem}
+    dialog{border:0; border-radius:16px; padding:0; width:min(720px, 96vw);}
+    .modal-header{display:flex; justify-content:space-between; align-items:center; padding:16px 20px; border-bottom:1px solid #eee}
+    .modal-body{padding:20px}
+    .x{background:transparent;border:0;font-size:20px;cursor:pointer}
+    /* Dropdown دولة (للبايع) */
+    .custom-dropdown{position:relative; border:1px solid #ccc; border-radius:10px; padding:15px 12px; cursor:pointer; user-select:none}
+    .custom-dropdown .dropdown-list{position:absolute; inset-inline-start:0; inset-block-start:calc(100% + 6px); z-index:10; width:100%; max-height:220px; overflow:auto; background:#fff; border:1px solid #ddd; border-radius:10px; display:none; box-shadow:0 6px 16px rgba(0,0,0,.08)}
+    .custom-dropdown .dropdown-list div{padding:10px 12px}
+    .custom-dropdown .dropdown-list div:hover{background:#f5f5f8}
+    .password-wrapper {
+  position: relative;
+}
+.password-wrapper input {
+  padding-right: 10px; /* مساحة للأيقونة */
+}
+.password-wrapper i {
+  position: absolute;
+  top: 50%;
+  left: 0px; /* لو عايزها شمال خليها left */
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>تسجيل حساب جديد</h1>
+    <form id="registerForm" >
+      <div class="row-role">
+      <div class="row">
+        <div class="col-4">
+          <label for="role">نوع الحساب</label>
+          <select id="role" name="role" required>
+            <option value="">— اختر —</option>
+            <option value="buyer">مشتري</option>
+            <option value="seller">بايع</option>
+          </select>
+        </div>
+      </div>
+      </div>
+      
+      <!-- الحقول المشتركة: تظهر بعد اختيار النوع -->
+      <div id="commonFields" class="row hidden">
+                <div class="col-3">
+          <label for="name">الاسم الكامل </label>
+          <input type="text" id="name" name="name"required />
+        </div>
+      
+
+        <div class="col-3">
+          <label for="email">البريد الإلكتروني</label>
+          <input type="email" id="email" name="email" autocomplete="email"required />
+        </div>
+
+<div class="col-3">
+  <label for="password">كلمة المرور</label>
+  <div class="password-wrapper">
+    <input type="password" id="password" name="password" autocomplete="current-password" required/>
+    <i class="fa-solid fa-eye" onclick="togglePassword('password', this)"></i>
+  </div>
+</div>
+
+<div class="col-3">
+  <label for="confirmPassword">تأكيد كلمة المرور</label>
+  <div class="password-wrapper">
+    <input type="password" id="confirmPassword" name="confirmPassword"  required/>
+    <i class="fa-solid fa-eye" onclick="togglePassword('confirmPassword', this)"></i>
+  </div>
+</div>
+</div>
+      <!-- قسم المشتري -->
+      <fieldset id="buyerform" class="hidden">
+        <legend>بيانات المشتري</legend>
+        <div class="row">
+          <div class="col-3">
+            <label for="gender">الجنس</label>
+            <select id="gender" name="gender"required>
+              <option value="male">ذكر</option>
+              <option value="">— اختر —</option>
+              <option value="female">أنثى</option>
+            </select>
+          </div>
+          <div class="col-3">
+            <label for="birthdate">تاريخ الميلاد </label>
+            <input type="date" id="birthdate" name="birthdate" required/>
+          </div>
+          <div class="col-3">
+            <label>الدولة</label>
+            <div class="custom-dropdown" id="country-select-buyer" tabindex="0">
+              <div class="selected" id="selected-country-buyer">اختر الدولة</div>
+              <div class="dropdown-list" id="dropdown-list-buyer"></div>
+            </div>
+            <input type="hidden" name="country" id="country" />
+          </div>
+          <!-- عناوين اختيارية -->
+          <div class="col-3">
+            <label for="city">المدينة  (اختياري)</label>
+            <input type="text" id="city" name="city" />
+          </div>
+          <div class="col-3">
+            <label for="address_line1">العنوان 1 (اختياري)</label>
+            <input type="text" id="address_line1" name="address_line1" />
+          </div>
+          <div class="col-3">
+            <label for="address_line2">العنوان 2 (اختياري)</label>
+            <input type="text" id="address_line2" name="address_line2" />
+          </div>
+          <div class="col-3">
+            <label for="postal_code">الرمز البريدي  (اختياري)</label>
+            <input type="text" id="postal_code" name="postal_code" />
+          </div>
+        </div>
+        <div id="buyerCheckboxes" class="checkboxes hidden">
+          <label class="checkboxes"><input id="buyer_privacyCheckbox" name="buyer_privacyCheckbox" type="checkbox" /> أوافق على سياسة الخصوصية</label>
+          <label class="checkboxes"><input id="buyer_rememberMe" name="buyer_rememberMe" type="checkbox" /> تذكرني</label>
+          <button id="showPrivacy" class="btn secondary" type="button">عرض السياسة</button>
+        </div>
+      </fieldset>
+
+      <!-- قسم البايع -->
+      <fieldset id="supplierform" class="hidden">
+        <legend>بيانات البائع </legend>
+        <div class="row">
+          <!-- أساسي للشركة -->
+          <div class="col-3">
+            <label for="company_name">الاسم التجاري</label>
+            <input type="text" id="company_name" name="company_name" />
+          </div>
+          <div class="col-3">
+            <label for="business_type">نوع الكيان التجاري</label>
+    <select id="business_type" name="business_type" required>
+
+      <option value="">— اختر —</option>
+      <option value="sole">ملكية فردية</option>
+      <option value="partnership">شراكة</option>
+      <option value="corporation">شركة مساهمة</option>
+      <option value="factory">مصنع</option>
+    </select></div>
+
+          <div class="col-3" >
+            <label>دولة التأسيس</label>
+            <div class="custom-dropdown" id="country-select" tabindex="0">
+              <div class="selected" id="selected-country">اختر الدولة</div>
+              <div class="dropdown-list" id="dropdown-list"></div>
+            </div>
+            <input type="hidden" name="company_country" id="company_country" />
+          </div>
+
+          <div class="col-3">
+            <label for="company_address">عنوان المقر الرئيسي </label>
+            <input type="text" id="company_address" name="company_address" required />
+          </div>
+
+          <!-- مستندات وهوية ضريبية -->
+          <div class="col-3">
+            <label for="commercial_registration">رقم السجل التجاري </label>
+            <input type="text" id="commercial_registration" name="commercial_registration"  required/>
+          </div>
+          <div class="col-3">
+            <label for="vat_number">شهادة ضريبية</label>
+            <input type="text" id="vat_number" name="vat_number"  required/>
+          </div>
+          <div class="col-3">
+            <label for="tax_id">البطاقة الضريبية</label>
+            <input type="text" id="tax_id" name="tax_id"  required/>
+          </div>
+
+          <div class="col-3">
+            <label for="commercial_registration_file">صورة السجل التجاري </label>
+            <input type="file" id="commercial_registration_file" name="commercial_registration_file" accept="image/*,.pdf" />
+          </div>
+          <div class="col-3">
+            <label for="tax_file">صورة البطاقة الضريبية </label>
+            <input type="file" id="tax_file" name="tax_file" accept="image/*,.pdf"  required/>
+          </div>
+          <div class="col-3">
+            <label for="license_file">رخصة مزاولة النشاط (اختياري) </label>
+            <input type="file" id="license_file" name="license_file" accept="image/*,.pdf" />
+          </div>
+
+          <!-- مسؤول التواصل -->
+          <div class="col-3">
+            <label for="contact_person">شخص مسؤول للتواصل </label>
+            <input type="text" id="contact_person" name="contact_person" required />
+          </div>
+          <div class="col-3">
+            <label for="contact_position">وظيفة الشخص المسؤول </label>
+            <input type="text" id="contact_position" name="contact_position"  required/>
+          </div>
+          <div class="col-3">
+            <label for="contact_phone">هاتف الشخص المسؤول </label>
+            <input type="tel" id="contact_phone" name="contact_phone"  required/>
+          </div>
+        </div>
+
+        <div id="sellerCheckboxes" class="checkboxes hidden">
+          <label class="checkboxes"><input id="seller_privacyCheckbox" name="seller_privacyCheckbox" type="checkbox" /> أوافق على سياسة الخصوصية</label>
+          <label class="checkboxes"><input id="seller_rememberMe" name="seller_rememberMe" type="checkbox" /> تذكرني</label>
+          <button id="showPrivacySeller" class="btn secondary" type="button">عرض السياسة</button>
+        </div>
+      </fieldset>
+
+      <div class="actions">
+        <button class="btn" type="submit">تسجيل</button>
+        <!-- <span class="help">* عند تغيير نوع الحساب يتم عرض و إرسال حقول هذا النوع فقط.</span> -->
+      </div>
+      <div id="signupError" class="error"></div>
+    </form>
+  </div>
+
+  <!-- نافذة سياسة الخصوصية -->
+
+<dialog id="privacyModal">
+  <div class="modal-header">
+    <strong>سياسة الخصوصية</strong>
+    <button class="x" id="closePrivacy">✕</button>
+  </div>
+  <div class="modal-body">
+    <p>مثال سياسة خصوصية مختصرة… (ضع نص السياسة الحقيقي هنا).</p>
+  </div>
+</dialog>
+
+<script>
+function togglePassword(id, icon) {
+  const input = document.getElementById(id);
+  if (input.type === "password") {
+    input.type = "text";
+    icon.classList.replace("fa-eye", "fa-eye-slash");
+  } else {
+    input.type = "password";
+    icon.classList.replace("fa-eye-slash", "fa-eye");
+  }
+}
+</script>
+  <!-- مهم: account.js يستورد countries من sighup.js داخليًا كـ ES Module -->
+  <script type="module" src="account.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+    body {
+      background-color: #fff;
+      color: #000;
+
+    }
+
+    .navbar, .footer {
+      background-color: #000;
+      color: #fff;
+    }
+
+    .nav-link{
+        margin-left: 5px;
+        
+    }
+    .navbar a, .navbar .nav-link {
+      color: #fff !important;
+    }
+
+    .brand-logo {
+      font-weight: bold;
+      font-size: 24px;
+      color: white;
+    }
+
+    .search-bar {
+max-width: 600px;         border-radius: 25px;
+    }
+
+    .search-bar input {
+      border-radius: 25px;
+      height: 48px;
+    }
+
+    .search-bar .input-group-text {
+      border-radius: 5px;
+      background-color: #000;
+      color: white;
+      cursor: pointer;
+    }
+
+    .nav-icons a {
+      margin-left: 15px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .subnav {
+      background-color: #f8f9fa;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+
+    .subnav a {
+      margin: 0 15px;
+      color: #000;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+
+
+
+.side-menu {
+  width: 300px;
+  height: 90vh;
+  background-color: #dbdbdb;
+  position: fixed;
+  top: 65px;
+  left: -300px;
+  transition: left 0.3s ease, opacity 0.3s ease;
+  z-index: 9999;
+  border-right: 1px solid #ccc;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  padding: 10px;
+  opacity: 0;
+  pointer-events: none;
+  overflow-y: auto; /* لازم علشان السكروول يشتغل في القائمة */
+}
+
+.side-menu.open {
+  left: 0;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+body.no-scroll {
+  height: 100vh;
+  overflow: hidden; /* يمنع أي scroll في الصفحة */
+}
+
+.close-btn {
+  font-size: 30px;
+  background: none;
+  border: none;
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  cursor: pointer;
+}
+
+
+.category-menu {
+  background-color: #dbdbdb;
+  overflow-y: auto;
+  direction: rtl;
+}
+
+.category-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  font-size: 18px;
+  color: #333;
+
+}
+
+.category-item:hover {
+  background-color: #959595;
+}
+
+.category-item i {
+  color: #666;
+  font-size: 14px;
+}
+
+.parcode{
+   height: 100px;width: 100%; 
+   background-color: #000;
+}
+.icon2{
+  position: relative;
+  bottom:  95px;
+  display: block;
+}
+.icon1{
+  position: relative;
+  bottom:  95px;
+}
+
+    .carousel-inner {
+
+      height: 300px;
+
+    }
+
+    .carousel-inner img {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+    }
+
+    .grid-boxes {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .grid-box {
+      height: 150px;
+      background-color: #f2f2f2;
+    }
+
+    .product-slider {
+      white-space: nowrap;
+      overflow-x: auto;
+      padding: 10px 0;
+    }
+
+    .product-item {
+      display: inline-block;
+      width: calc(100% / 6);
+      height: 200px;
+      background-color: #eaeaea;
+      margin-right: 10px;
+    }
+
+    .footer {
+      padding: 20px;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .grid-boxes {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .product-item {
+        width: calc(100% / 2.5);
+      }
+
+      .nav-icons {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  
+    /* Save password prompt */
+.save-password-prompt {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  z-index: 9999;
+}
+.save-password-prompt .prompt-card {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+/*
+
+///وصف الممنتج في الصفحه الرئسييه 
+*/
+.product-info {
+  padding: 5px;
+}
+
+.product-price {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.product-rating {
+  color: gold;
+  font-size: 14px;
+}
+
+.product-rating span {
+  color: #555;
+  margin-left: 5px;
+}
+
+.product-description {
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0;
+}
+
+.product-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.add-to-cart, .buy-now {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-to-cart {
+  background: #555;
+  color: #fff;
+}
+
+.buy-now {
+  background: #000;
+  color: #fff;
+}

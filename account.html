@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>حسابي - SouqBridge</title>
+  <link rel="stylesheet" href="style.css">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    body {
+      background: #fff;
+      /* صفحة بيضاء */
+    }
+
+    /* تأثير الخلفية البلور عند فتح المودال */
+    .modal-open .modal-backdrop {
+      backdrop-filter: blur(5px);
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- مودال تسجيل الدخول -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" dir="rtl">
+      <div class="modal-content text-end">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">تسجيل الدخول</h5>
+          <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form autocomplete="on" id="loginForm">
+            <div class="mb-3">
+              <label for="loginEmail" class="form-label">البريد الإلكتروني</label>
+              <input type="email" class="form-control" id="loginEmail" placeholder="أدخل بريدك" autocomplete="email"
+                required />
+            </div>
+            <div class="mb-3 position-relative">
+              <label for="loginPassword" class="form-label">كلمة المرور</label>
+              <input type="password" class="form-control" id="loginPassword" placeholder="********"
+                autocomplete="current-password" required />
+              <i class="fa-solid fa-eye position-absolute bottom-0 start-0 translate-middle-y me-3"
+                style="cursor:pointer;"
+                onclick="const field = this.previousElementSibling; field.type = field.type === 'password' ? 'text' : 'password'; this.classList.toggle('fa-eye'); this.classList.toggle('fa-eye-slash');"></i>
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="rememberMe" />
+              <label class="form-check-label" for="rememberMe">تذكرني</label>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">تسجيل الدخول</button>
+          </form>
+          <div id="loginError" class="text-danger mt-2" style="display:none;"></div>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <a href="signup.html" class="text-primary">ليس لديك حساب؟ سجّل الآن</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    :root {
+      --bg: #f7f7f9;
+      --card: #fff;
+      --muted: #6c757d
+    }
+
+    body {
+      background: var(--bg);
+      font-family: "Noto Kufi Arabic", Tahoma, Arial, sans-serif
+    }
+
+    .sidebar {
+      min-width: 220px;
+      max-width: 260px;
+      background: var(--card);
+      border-left: 1px solid #e6e6e6;
+      padding: 20px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      right: 0;
+      overflow: auto
+    }
+
+    .main {
+      margin-right: 270px;
+      padding: 28px
+    }
+
+    .card-ghost {
+      background: var(--card);
+      border: 1px solid #eaeaea;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 16px
+    }
+
+    .section-title {
+      font-weight: 700;
+      margin-bottom: 12px
+    }
+
+    .small-muted {
+      color: var(--muted);
+      font-size: 0.95rem
+    }
+
+    @media (max-width: 992px) {
+      .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-left: 0;
+        border-top: 1px solid #e6e6e6
+      }
+
+      .main {
+        margin-right: 0;
+        padding: 16px
+      }
+    }
+  </style>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h4 class="mb-3">لوحة التحكم</h4>
+    <div class="list-group">
+      <a class="list-group-item list-group-item-action active" href="#dashboard">الملخص</a>
+      <!-- Orders and Messages intentionally removed as requested -->
+      <a class="list-group-item list-group-item-action" href="#wishlist">قائمة الرغبات</a>
+      <a class="list-group-item list-group-item-action" href="#favorites">البائعون المفضّلون</a>
+      <a class="list-group-item list-group-item-action" href="#addresses">عناوين الشحن</a>
+      <a class="list-group-item list-group-item-action" href="#payments">طرق الدفع</a>
+      <a class="list-group-item list-group-item-action" href="#reviews">مراجعاتي</a>
+      <a class="list-group-item list-group-item-action" href="#invoices">الفواتير</a>
+      <a class="list-group-item list-group-item-action" href="#support">الدعم الفني</a>
+      <a class="list-group-item list-group-item-action" href="#settings">الإعدادات والأمان</a>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main">
+    <!-- Header -->
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <div>
+        <h2 class="m-0">مرحبًا بك، عبد الرحمن</h2>
+        <div class="small-muted">آخر دخول: 10 أغسطس 2025</div>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-secondary btn-sm">تعديل الملف الشخصي</button>
+        <button id="logoutBtn" class="btn btn-danger">تسجيل خروج</button>
+      </div>
+    </div>
+
+
+    <!-- Dashboard summary -->
+    <section id="dashboard" class="card-ghost">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="p-3 border rounded-2 h-100">
+            <div class="small-muted">الرصيد المتاح</div>
+            <h3>EGP 1,250.00</h3>
+            <div class="small-muted">قابل للسحب خلال 24 ساعة</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 border rounded-2 h-100">
+            <div class="small-muted">طلبات معلقة</div>
+            <h3>—</h3>
+            <div class="small-muted">لا توجد طلبات معروضة (تم حذف قسم الطلبات)</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 border rounded-2 h-100">
+            <div class="small-muted">الإخطارات</div>
+            <h3>3</h3>
+            <div class="small-muted">عروض وتجديدات</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wishlist -->
+    <section id="wishlist" class="card-ghost">
+      <div class="section-title">قائمة الرغبات</div>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="p-3 border rounded-2">
+            <div class="d-flex align-items-start">
+              <div style="width:80px;height:80px;background:#f1f1f1;border-radius:8px;margin-left:12px"></div>
+              <div class="flex-grow-1">
+                <div class="fw-bold">اسم المنتج المثال</div>
+                <div class="small-muted">EGP 350.00 — 2 بائعين</div>
+                <div class="mt-2">
+                  <button class="btn btn-sm btn-primary">انتقال للسعر</button>
+                  <button class="btn btn-sm btn-outline-secondary">إزالة</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- more wishlist items... -->
+      </div>
+    </section>
+
+    <!-- Favorite sellers -->
+    <section id="favorites" class="card-ghost">
+      <div class="section-title">البائعون المفضّلون</div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="p-3 border rounded-2 d-flex justify-content-between align-items-center">
+            <div>
+              <div class="fw-bold">متجر مصر للأقمشة</div>
+              <div class="small-muted">متابعة منذ 3 أشهر — خصومات 5%</div>
+            </div>
+            <div>
+              <button class="btn btn-sm btn-outline-primary">زيارة المتجر</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Addresses -->
+    <section id="addresses" class="card-ghost">
+      <div class="section-title">عناوين الشحن</div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="p-3 border rounded-2">
+            <div class="fw-bold">المنزل (افتراضي)</div>
+            <div class="small-muted">شارع النيل، القاهرة، مصر</div>
+            <div class="mt-2">
+              <button class="btn btn-sm btn-outline-secondary">تعديل</button>
+              <button class="btn btn-sm btn-outline-danger">حذف</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="p-3 border rounded-2 placeholder-glow">
+            <div class="fw-bold">أضف عنوانًا جديدًا</div>
+            <div class="mt-2">
+              <button class="btn btn-sm btn-primary">إضافة عنوان</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Payment methods -->
+    <section id="payments" class="card-ghost">
+      <div class="section-title">طرق الدفع</div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="p-3 border rounded-2 d-flex justify-content-between align-items-center">
+            <div>
+              <div class="fw-bold">Visa •••• 4242</div>
+              <div class="small-muted">منتهي الصلاحية: 12/2026</div>
+            </div>
+            <div>
+              <button class="btn btn-sm btn-outline-secondary">تعديل</button>
+              <button class="btn btn-sm btn-outline-danger">حذف</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="p-3 border rounded-2 placeholder-glow">
+            <div class="fw-bold">أضف طريقة دفع جديدة</div>
+            <div class="mt-2"><button class="btn btn-sm btn-primary">ربط بطاقة أو محفظة</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section id="reviews" class="card-ghost">
+      <div class="section-title">مراجعات قمت بكتابتها</div>
+      <div class="p-3 border rounded-2">
+        <div class="fw-bold">منتج: قميص قطني</div>
+        <div class="small-muted">4 من 5 — 12 يونيو 2025</div>
+        <p class="mt-2">تعليق المستخدم: جودة جيدة ولكن اللون مختلف قليلاً عن الصور.</p>
+        <div><button class="btn btn-sm btn-outline-secondary">تعديل المراجعة</button></div>
+      </div>
+    </section>
+
+    <!-- Invoices -->
+    <section id="invoices" class="card-ghost">
+      <div class="section-title">الفواتير</div>
+      <div class="p-3 border rounded-2">
+        <div class="d-flex justify-content-between">
+          <div>
+            <div class="fw-bold">طلب: INV-2025-0001</div>
+            <div class="small-muted">تاريخ: 01 يناير 2025 — المجموع: EGP 450.00</div>
+          </div>
+          <div><button class="btn btn-sm btn-outline-primary">تحميل PDF</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Support -->
+    <section id="support" class="card-ghost">
+      <div class="section-title">الدعم الفني</div>
+      <div class="p-3 border rounded-2">
+        <div class="fw-bold">فتح تذكرة جديدة</div>
+        <p class="small-muted">للاستفسارات حول الطلبات، المدفوعات أو الحساب</p>
+        <div class="mt-2">
+          <button class="btn btn-sm btn-primary">فتح تذكرة</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Settings -->
+    <section id="settings" class="card-ghost">
+      <div class="section-title">الإعدادات والأمان</div>
+      <div class="p-3 border rounded-2">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="small-muted">البريد الإلكتروني</div>
+            <div>abdelrhman@example.com</div>
+          </div>
+          <div class="col-md-4">
+            <div class="small-muted">الهاتف</div>
+            <div>+20 10 1234 5678</div>
+          </div>
+          <div class="col-md-4 text-md-end">
+            <button class="btn btn-sm btn-outline-secondary">تغيير كلمة السر</button>
+          </div>
+        </div>
+        <hr>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="twoFA">
+          <label class="form-check-label" for="twoFA">تفعيل المصادقة الثنائية (2FA)</label>
+        </div>
+      </div>
+    </section>
+    <section class="mt-4">
+      <button class="btn btn-outline-danger w-100">حذف الحساب نهائيًا</button>
+    </section>
+  </main>
+
+
+
+  <h1>cvxcv</h1>
+  <!-- <div class="text-center my-2" id="logout-container" style="display:block;">
+    <button id="logoutBtn" class="btn btn-danger">تسجيل خروج</button>
+  </div> -->
+  <!-- <button id="logoutBtn" class="btn btn-danger">تسجيل خروج</button> -->
+  <!-- Other content like login modal -->
+  <script type="module">
+    import { initAccount } from './account.js';
+    initAccount();
+  </script>
+  <script type="module" src="account.js"></script>
+  <script type="module" src="app.js"></script>
+  <script type="module" src="navbar.js" defer></script>
+
+</body>
+
+</html>

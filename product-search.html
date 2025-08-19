@@ -1,0 +1,167 @@
+
+  <style>
+
+    
+    .sidebar {
+            direction: ltr;
+      background: #f5f5f5;
+      margin: 0;
+      width: 200px;
+      padding: 6px;
+      margin: 0;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    .filter-section {
+      margin-bottom: 25px;
+    }
+    .filter-section h4 {
+      margin-bottom: 10px;
+      font-size: 17px;
+      color: #222;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+    .filter-section label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: #333;
+    }
+    .filter-section input[type="checkbox"] {
+      margin-left: 8px;
+      transform: scale(1.1);
+    }
+    .show-more {
+      color: #007185;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 8px;
+      display: inline-block;
+    }
+.hidden {
+  display: none;
+}
+
+  </style>
+
+  <div class="sidebar">
+    <!-- Brands -->
+    <div class="filter-section">
+      <h4>الماركات</h4>
+      <div id="brands-list">
+        <!-- أول 10 فقط ظاهره -->
+        <div class="brand-item"><label><input type="checkbox"> Five Star</label></div>
+        <div class="brand-item"><label><input type="checkbox"> PAPERAGE</label></div>
+        <div class="brand-item"><label><input type="checkbox"> Mead</label></div>
+        <div class="brand-item"><label><input type="checkbox"> Oxford</label></div>
+        <div class="brand-item"><label><input type="checkbox"> RETTACY</label></div>
+        <div class="brand-item"><label><input type="checkbox"> LEUCHTTURM1917</label></div>
+        <div class="brand-item"><label><input type="checkbox"> EMISHOI</label></div>
+        <div class="brand-item"><label><input type="checkbox"> Yansanido</label></div>
+        <div class="brand-item"><label><input type="checkbox"> Lily Pulitzer</label></div>
+        <div class="brand-item"><label><input type="checkbox"> Cambridge</label></div>
+
+        <!-- بقية البراندات hidden -->
+        <div id="more-brands" class="hidden">
+          <label><input type="checkbox"> Moleskine</label>
+          <label><input type="checkbox"> KOKUYO</label>
+          <label><input type="checkbox"> STEEL MILL AND CO.</label>
+          <label><input type="checkbox"> Compendium</label>
+          <label><input type="checkbox"> DesignWorks Ink</label>
+          <label><input type="checkbox"> Élan Publishing Company</label>
+          <label><input type="checkbox"> POPRUN</label>
+          <label><input type="checkbox"> Graphique</label>
+          <label><input type="checkbox"> Maruman</label>
+          <label><input type="checkbox"> Rocketbook</label>
+          <label><input type="checkbox"> WORLD TRAVELER</label>
+          <label><input type="checkbox"> ROARING SPRING</label>
+          <label><input type="checkbox"> Tops</label>
+          <label><input type="checkbox"> LEATHER VILLAGE</label>
+          <label><input type="checkbox"> BAZIC Products</label>
+          <label><input type="checkbox"> MGGAO</label>
+          <label><input type="checkbox"> kate spade new york</label>
+          <label><input type="checkbox"> Rhodia</label>
+          <label><input type="checkbox"> STAPLES</label>
+          <label><input type="checkbox"> Blueline</label>
+          <label><input type="checkbox"> Primitives by Kathy</label>
+          <label><input type="checkbox"> Grupo Erik</label>
+          <label><input type="checkbox"> アピカ</label>
+          <label><input type="checkbox"> Ampad</label>
+          <label><input type="checkbox"> Erin Condren</label>
+          <label><input type="checkbox"> 1InTheOffice</label>
+          <label><input type="checkbox"> Rite in the Rain</label>
+          <label><input type="checkbox"> CREATESPACE</label>
+          <label><input type="checkbox"> C.R. Gibson</label>
+          <label><input type="checkbox"> キョクトウ・アソシエイツ</label>
+        </div>
+
+        <!-- زر عرض المزيد -->
+        <span class="show-more" id="toggle-brands">عرض المزيد</span>
+      </div>
+    </div>
+
+    <!-- باقي الأقسام -->
+    <div class="filter-section">
+      <h4>الشخصيات</h4>
+      <label><input type="checkbox"> Snoopy</label>
+      <label><input type="checkbox"> Peanuts</label>
+      <label><input type="checkbox"> Winnie the Pooh</label>
+      <label><input type="checkbox"> Stitch</label>
+    </div>
+
+    <div class="filter-section">
+      <h4>الخصومات</h4>
+      <label><input type="checkbox"> جميع الخصومات</label>
+      <label><input type="checkbox"> عروض اليوم</label>
+    </div>
+
+    <div class="filter-section">
+      <h4>الخصائص</h4>
+      <label><input type="checkbox"> غلاف ناعم</label>
+      <label><input type="checkbox"> غلاف صلب</label>
+      <label><input type="checkbox"> مقاوم للماء</label>
+      <label><input type="checkbox"> يحتوي على فاصل</label>
+      <label><input type="checkbox"> بتاريخ</label>
+      <label><input type="checkbox"> فواصل</label>
+      <label><input type="checkbox"> قفل</label>
+    </div>
+
+    <div class="filter-section">
+      <h4>نوع السطور</h4>
+      <label><input type="checkbox"> سادة</label>
+      <label><input type="checkbox"> مربعات</label>
+      <label><input type="checkbox"> منقط</label>
+      <label><input type="checkbox"> كوليج</label>
+      <label><input type="checkbox"> قانوني</label>
+      <label><input type="checkbox"> ضيق</label>
+      <label><input type="checkbox"> أربعة أسطر</label>
+    </div>
+
+    <div class="filter-section">
+      <h4>الحالة</h4>
+      <label><input type="checkbox"> جديد</label>
+      <label><input type="checkbox"> مستعمل</label>
+    </div>
+
+    <div class="filter-section">
+      <h4>الطول</h4>
+      <label><input type="checkbox"> حتى 6.9 بوصة</label>
+      <label><input type="checkbox"> من 7 إلى 7.9 بوصة</label>
+      <label><input type="checkbox"> من 8 إلى 8.9 بوصة</label>
+      <label><input type="checkbox"> 9 بوصة فأكثر</label>
+    </div>
+
+    <div class="filter-section">
+      <h4>عدد الصفحات</h4>
+      <label><input type="checkbox"> حتى 98 صفحة</label>
+      <label><input type="checkbox"> من 99 إلى 119 صفحة</label>
+      <label><input type="checkbox"> من 120 إلى 140 صفحة</label>
+      <label><input type="checkbox"> 141 صفحة فأكثر</label>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+
+

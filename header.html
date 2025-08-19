@@ -1,0 +1,232 @@
+
+<style>
+/* السايدبار للرسائل */
+.messages-sidebar {
+  position: fixed;
+  top: 0;
+  right: -400px; /* خارج الشاشة */
+  width: 400px;
+  height: 100%;
+  background-color: #fff;
+  border-left: 2px solid #000;
+  box-shadow: -3px 0 8px rgba(0,0,0,0.2);
+  transition: right 0.3s ease;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+}
+
+.messages-sidebar.open {
+  right: 0;
+}
+
+.messages-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #000;
+  color: #fff;
+  font-weight: bold;
+}
+
+.messages-header button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.messages-body {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.message-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.message-item:hover {
+  background-color: #f2f2f2;
+}
+
+.message-chat {
+  border-top: 1px solid #ddd;
+  padding: 10px;
+}
+
+
+.side-menu.open {
+  right: 0;
+}
+
+.account-menu {
+  padding: 20px;
+}
+
+.account-menu h4 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.account-menu p {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0px;
+  left: 5px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}</style>
+
+<header>
+  <!-- Navbar -->
+  <!-- <div id="navbar-container"></div> -->
+<nav class="navbar navbar-expand-lg px-3">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+
+      <!-- يمين الصفحة: اللوجو + الحساب -->
+      <div class="d-flex align-items-center">
+       <a href="index.html" style=" text-decoration:none ;"> <span class="brand-logo me-4">SouqBridge</span></a>
+        <!-- زر الحساب: يظهر "Account" أو اسم المستخدم -->
+        <a href="#" class="nav-link d-flex align-items-center" id="auth-buttons" data-bs-toggle="modal"
+          data-bs-target="#loginModal">
+          <i class="fa-solid fa-user me-2"></i>
+          <span id="auth-text">Account</span>
+        </a>
+      </div>
+
+      <!-- النص: مربع البحث -->
+<div class="search-bar mx-4 flex-grow-1">
+  <div class="input-group">
+    <span class="input-group-text">Filter</span>
+    <input type="text" id="searchInput" class="form-control" placeholder="Search for products...">
+    <button id="searchBtn" class="input-group-text" style="cursor:pointer;">Search</button>
+  </div>
+</div>
+
+      <!-- شمال الصفحة: الأيقونات -->
+      <div class="d-flex align-items-center nav-icons gap-3 flex-wrap">
+        <a href="/sellers/index.html" class="d-flex align-items-center" data-i18n="cart">
+          <i class="fa-solid fa-cart-shopping me-1"></i> Cart
+        </a>
+        <a href="#" class="d-flex align-items-center" data-i18n="messages">
+          <i class="fa-solid fa-envelope me-1"></i> Messages
+        </a>
+        <a href="#" class="d-flex align-items-center" data-i18n="orders">
+          <i class="fa-solid fa-receipt me-1"></i> Purchases
+        </a>
+        <a href="#" class="d-flex align-items-center" data-i18n="deliver_to">
+          <i class="fa-solid fa-truck me-1"></i> Deliver To
+        </a>
+      </div>
+
+    </div>
+  </nav>
+<!-- سايدبار الرسائل -->
+<div id="messagesSidebar" class="messages-sidebar">
+  <div class="messages-header">
+    <span>الرسائل</span>
+    <button id="closeMessages">&times;</button>
+  </div>
+  <div class="messages-body" id="conversations">
+    <div class="message-item">محادثة 1</div>
+    <div class="message-item">محادثة 2</div>
+    <div class="message-item">محادثة 3</div>
+  </div>
+  <div class="message-chat">
+    <form id="messageForm">
+      <input type="text" id="subject" placeholder="الموضوع (اختياري)" class="form-control mb-2" />
+      <textarea id="body" rows="3" placeholder="اكتب رسالتك..." class="form-control mb-2"></textarea>
+      <input type="file" id="image" accept="image/*" class="form-control mb-2" />
+      <button type="submit" class="btn btn-dark w-100">إرسال</button>
+    </form>
+  </div>
+</div>
+
+  <!-- مودال تسجيل الدخول -->
+
+  <!-- زر تسجيل خروج يظهر بعد تسجيل الدخول -->
+<div class="subnav position-relative">
+    <!-- زرار Menu على الشمال -->
+    <button id="menuBtn" class=" btn btn-outline-primary position-absolute start-0 top-50 translate-middle-y ms-3">
+      ☰ Menu
+    </button>
+    <!-- اللينكات في النص -->
+    <div class="subnav-links d-flex justify-content-center gap-4">
+
+
+      <a href="product-mockup.html">Offers</a>
+      <a href="#">Auctions</a>
+      <a href="#">Trending</a>
+      <a href="#">Start Selling</a>
+      <a href="#">Help</a>
+      <div class="dropdown">
+        <i class="fa-solid fa-dollar-sign me-1"></i> Currency
+        <ul class="dropdown-menu" aria-labelledby="currencyDropdown">
+          <li><a class="dropdown-item" href="#">USD $</a></li>
+          <li><a class="dropdown-item" href="#">EGP ج.م</a></li>
+          <li><a class="dropdown-item" href="#">EUR €</a></li>
+        </ul>
+      </div>
+      <a href="#" class="d-flex align-items-center" id="languageToggle" data-i18n="language">
+        <i class="fa-solid fa-globe me-1"></i>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+  <div id="sideMenu" class="side-menu">
+    <button id="closeMenu" class="close-btn">&times;</button>
+    <div class="category-menu">
+      <div class="category-item"><span>الزراعة</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>الملابس</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>السيارات والدراجات</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>الجمال والعناية الشخصية</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>الخدمات التجارية</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>المواد الكيميائية</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>عتاد وبرمجيات الحاسوب</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>البناء والعقارات</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>الإلكترونيات الاستهلاكية</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>المعدات الكهربائية والإمدادات</span><i class="fa-solid fa-chevron-left"></i>
+      </div>
+      <div class="category-item"><span>المكونات الإلكترونية</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>الطاقة</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>البيئة</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>إكسسوارات الموضة</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>الأغذية والمشروبات</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>الأثاث</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>الهدايا والحرف</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>الأجهزة والمعدات</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>الصحة والطب</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>المنزل والحديقة</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>الأجهزة المنزلية</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>المعدات الصناعية والمكونات</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>المجوهرات والساعات</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>الإضاءة</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>الحقائب والشنط</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>الآلات</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>أدوات القياس والتحليل</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>المعادن والمعادن الثقيلة</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>لوازم المكتب والمدرسة</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>التعبئة والطباعة</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>البلاستيك والمطاط</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>الأمن والحماية</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>معدات الخدمة</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>الأحذية والإكسسوارات</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>الرياضة والترفيه</span><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="category-item"><span>المنسوجات والجلود</span><i class="fa-solid fa-chevron-left"></i></div>
+    </div>
+  </div>
+</header>
+

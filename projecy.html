@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SouqBridge</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+        .header-div {
+            width: 100%;
+            height: 50px;
+            background-color: #232f3e;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+
+        }
+
+        .products-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 18px;
+            color: #B12704;
+            margin-bottom: 5px;
+        }
+
+        .product-description {
+            font-size: 14px;
+            color: #565959;
+            margin-bottom: 5px;
+        }
+
+        .product-rating {
+            font-size: 14px;
+            color: #FFA41C;
+            margin-bottom: 10px;
+        }
+
+        .pagination {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .pagination a {
+            margin: 0 5px;
+            text-decoration: none;
+            color: #007185;
+            font-size: 16px;
+        }
+
+        .pagination a.active {
+            font-weight: bold;
+            color: #C7511F;
+        }
+
+        .layout {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        .container {
+            flex: 5;
+            margin: 0px;
+            padding: 10px;
+            flex: 1;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header-container"></div>
+
+<div id="container" class="layout" style="display: none;">
+  <div class="sidebar"></div>
+  <div class="container">
+
+            <div class="header-div">شريط تصفية أو بحث (عرض 100%، ارتفاع 50 بكسل)</div>
+
+            <div class="products-container">
+                <div class="product-card">
+                    <img src="https://via.placehold.com/250x200?text=Product+1" alt="صورة المنتج 1"
+                    class="product-image">
+                    <div class="product-title">عنوان المنتج 1</div>
+                    <div class="product-price">$29.99</div>
+                    <div class="product-description">وصف مختصر للمنتج 1، يحتوي على تفاصيل أساسية.</div>
+                    <div class="product-rating">★★★★☆ (تقييم 4.5 من 5)</div>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placehold.com/250x200?text=Product+2" alt="صورة المنتج 2"
+                    class="product-image">
+                    <div class="product-title">عنوان المنتج 2</div>
+                    <div class="product-price">$39.99</div>
+                    <div class="product-description">وصف مختصر للمنتج 2، يحتوي على تفاصيل أساسية.</div>
+                    <div class="product-rating">★★★★★ (تقييم 5 من 5)</div>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placehold.com/250x200?text=Product+3" alt="صورة المنتج 3"
+                    class="product-image">
+                    <div class="product-title">عنوان المنتج 3</div>
+                    <div class="product-price">$19.99</div>
+                    <div class="product-description">وصف مختصر للمنتج 3، يحتوي على تفاصيل أساسية.</div>
+                    <div class="product-rating">★★★☆☆ (تقييم 3.5 من 5)</div>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placehold.com/250x200?text=Product+4" alt="صورة المنتج 4"
+                    class="product-image">
+                    <div class="product-title">عنوان المنتج 4</div>
+                    <div class="product-price">$49.99</div>
+                    <div class="product-description">وصف مختصر للمنتج 4، يحتوي على تفاصيل أساسية.</div>
+                    <div class="product-rating">★★★★☆ (تقييم 4 من 5)</div>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://via.placehold.com/250x200?text=Product+5" alt="صورة المنتج 5"
+                    class="product-image">
+                    <div class="product-title">عنوان المنتج 5</div>
+                    <div class="product-price">$59.99</div>
+                    <div class="product-description">وصف مختصر للمنتج 5، يحتوي على تفاصيل أساسية.</div>
+                    <div class="product-rating">★★★★★ (تقييم 4.8 من 5)</div>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placehold.com/250x200?text=Product+6" alt="صورة المنتج 6"
+                    class="product-image">
+                    <div class="product-title">عنوان المنتج 6</div>
+                    <div class="product-price">$69.99</div>
+                    <div class="product-description">وصف مختصر للمنتج 6، يحتوي على تفاصيل أساسية.</div>
+                    <div class="product-rating">★★★☆☆ (تقييم 3.8 من 5)</div>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placehold.com/250x200?text=Product+7" alt="صورة المنتج 7"
+                    class="product-image">
+                    <div class="product-title">عنوان المنتج 7</div>
+                    <div class="product-price">$79.99</div>
+                    <div class="product-description">وصف مختصر للمنتج 7، يحتوي على تفاصيل أساسية.</div>
+                    <div class="product-rating">★★★★☆ (تقييم 4.2 من 5)</div>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placehold.com/250x200?text=Product+8" alt="صورة المنتج 8"
+                    class="product-image">
+                    <div class="product-title">عنوان المنتج 8</div>
+                    <div class="product-price">$89.99</div>
+                    <div class="product-description">وصف مختصر للمنتج 8، يحتوي على تفاصيل أساسية.</div>
+                    <div class="product-rating">★★★★★ (تقييم 4.9 من 5)</div>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">التالي &gt;</a>
+            </div>
+       
+    </div>
+</div>
+<div id="loader">جارٍ التحميل...</div>
+
+
+    <script type="module" src="app.js"></script>
+    <script type="module" src="navbar.js"></script>
+    <script type="module" src="search.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
